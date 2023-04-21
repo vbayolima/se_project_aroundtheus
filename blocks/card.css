@@ -1,0 +1,52 @@
+.card__list {
+  margin: 0;
+  padding: 0;
+  display: grid;
+  justify-content: center;
+  grid-template-columns: repeat(auto-fit, 282px);
+  grid-gap: 20px 17px;
+}
+
+.card {
+  list-style-type: none;
+  display: flex;
+  flex-direction: column;
+  border-radius: 10px;
+}
+
+.card__image {
+  width: 282px;
+  height: 282px;
+  border-radius: 10px 10px 0 0;
+}
+
+.card__caption {
+  padding: 25px 20px 25px 20px;
+  background-color: #fff;
+  color: #000;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-radius: 0 0 10px 10px;
+}
+
+.card__name {
+  font-family: "Inter";
+  font-weight: 900;
+  font-size: 24px;
+  line-height: 1.2;
+  /*this is to add ellipsis to long vanoise park name */
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.card__like-button {
+  background: url(../images/like-icon.svg);
+  background-color: transparent;
+  background-position: center;
+  background-repeat: no-repeat;
+  border: none;
+  width: 21px;
+  height: 18px;
+}
