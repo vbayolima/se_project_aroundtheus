@@ -22,7 +22,7 @@
 
 .profile__name {
   margin: 0;
-  font-family: "Inter";
+  font-family: "Inter", Arial, sans-serif;
   font-size: 42px;
   line-height: 1.14;
   font-weight: 500;
@@ -34,14 +34,21 @@
   background-color: transparent;
   background-position: center;
   background-repeat: no-repeat;
-  max-width: 24px;
-  max-height: 24px;
+  border: 1px solid #fff;
+  align-self: center;
+  width: 24px;
+  height: 24px;
   grid-area: button;
+}
+
+.profile__edit-button:hover {
+  opacity: 0.6;
+  cursor: pointer;
 }
 
 .profile__description {
   margin: 0;
-  font-family: "Inter";
+  font-family: "Inter", Arial, sans-serif;
   font-size: 18px;
   line-height: 1.2;
   font-weight: 400;
@@ -54,6 +61,48 @@
   background-color: transparent;
   background-position: center;
   background-repeat: no-repeat;
+  border: 2px solid #fff;
+  border-radius: 2px;
   width: 150px;
   height: 50px;
+}
+
+.profile__add-button:hover {
+  opacity: 0.6;
+  cursor: pointer;
+}
+
+@media screen and (max-width: 480px) {
+  .profile {
+    flex-direction: column;
+  }
+
+  .profile__info {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    width: 100%;
+  }
+
+  .profile__name {
+    font-size: 22px;
+    line-height: 1.2;
+  }
+
+  .profile__edit-button {
+    width: 18px;
+    height: 18px;
+  }
+
+  .profile__description {
+    width: 100%;
+    text-align: center;
+    font-size: 14px;
+    line-height: 1.2;
+  }
+
+  .profile__add-button {
+    margin: 0;
+    width: 100%;
+  }
 }
