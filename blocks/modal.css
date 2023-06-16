@@ -6,11 +6,12 @@
   right: 0;
   z-index: 50;
   background-color: rgba(0, 0, 0, 0.5);
-  display: none;
+  display: flex;
+  visibility: hidden;
 }
 
 .modal_opened {
-  display: flex;
+  visibility: visible;
 }
 
 .modal__container {
