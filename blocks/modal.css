@@ -54,6 +54,26 @@
   box-sizing: border-box;
 }
 
+.modal__input {
+  border: none;
+  outline: none;
+  border-bottom: 1px solid #000;
+  min-width: 358px;
+  height: 14px;
+  padding: 0 0 14px;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 17px;
+}
+
+.modal__input:first-of-type {
+  margin-bottom: 30px;
+}
+
+.modal__input:last-of-type {
+  margin-bottom: 48px;
+}
+
 .modal__button {
   padding: 0;
   border: none;
@@ -76,6 +96,10 @@
     height: 26px;
     bottom: calc(100% + 13px);
     left: calc(100% - 30px);
+  }
+
+  .modal__input {
+    min-width: 238px;
   }
 
   .modal__button {
