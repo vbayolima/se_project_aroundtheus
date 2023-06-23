@@ -58,7 +58,7 @@
 .modal__input {
   border: none;
   outline: none;
-  border-bottom: 1px solid #000;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
   min-width: 358px;
   height: 14px;
   padding: 0 0 14px;
@@ -110,5 +110,28 @@
 
   .modal__button {
     height: 46px;
+  }
+}
+
+@media screen and (min-width: 250px) and (max-width: 350px) {
+  .modal {
+    padding: 0;
+  }
+
+  .modal__container {
+    max-width: 282px;
+    max-height: 322px;
+    padding: 25px 22px;
+  }
+
+  .modal__heading {
+    margin: 0 0 75px;
+    font-size: 18px;
+    line-height: 22px;
+  }
+
+  .modal__button {
+    font-size: 14px;
+    line-height: 17px;
   }
 }
