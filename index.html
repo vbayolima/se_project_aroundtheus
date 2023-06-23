@@ -35,98 +35,7 @@
           <button type="button" class="profile__add-button"></button>
         </section>
         <section class="cards page__section">
-          <ul class="cards__list">
-            <li class="card">
-              <img
-                src="./images/yosemite.jpg"
-                alt="Yosemite Valley Image"
-                class="card__image"
-              />
-              <div class="card__caption">
-                <h2 class="card__name">Yosemite Valley</h2>
-                <button
-                  type="button"
-                  class="card__like-button"
-                  name="like-button"
-                ></button>
-              </div>
-            </li>
-            <li class="card">
-              <img
-                src="./images/lake-louise.jpg"
-                alt="Lake Louise Image"
-                class="card__image"
-              />
-              <div class="card__caption">
-                <h2 class="card__name">Lake Louise</h2>
-                <button
-                  type="button"
-                  class="card__like-button"
-                  name="like-button"
-                ></button>
-              </div>
-            </li>
-            <li class="card">
-              <img
-                src="./images/bald-mountains.jpg"
-                alt="Bald Mountains Image"
-                class="card__image"
-              />
-              <div class="card__caption">
-                <h2 class="card__name">Bald Mountains</h2>
-                <button
-                  type="button"
-                  class="card__like-button"
-                  name="like-button"
-                ></button>
-              </div>
-            </li>
-            <li class="card">
-              <img
-                src="./images/latemar.jpg"
-                alt="Latemar Image"
-                class="card__image"
-              />
-              <div class="card__caption">
-                <h2 class="card__name">Latemar</h2>
-                <button
-                  type="button"
-                  class="card__like-button"
-                  name="like-button"
-                ></button>
-              </div>
-            </li>
-            <li class="card">
-              <img
-                src="./images/vanoise.jpg"
-                alt="Vanoise National Park Image"
-                class="card__image"
-              />
-              <div class="card__caption">
-                <h2 class="card__name">Vanoise National Park</h2>
-                <button
-                  type="button"
-                  class="card__like-button"
-                  name="like-button"
-                ></button>
-              </div>
-            </li>
-            <li class="card">
-              <img
-                src="./images/lago.jpg"
-                alt="Lago di Braies Image"
-                class="card__image"
-              />
-              <div class="card__caption">
-                <h2 class="card__name">Lago di Braies</h2>
-                <button
-                  type="button"
-                  class="card__like-button"
-                  name="like-button"
-                ></button>
-              </div>
-            </li>
-          </ul>
+          <ul class="cards__list"></ul>
         </section>
         <footer class="footer page__section">
           <p class="footer__copyright">© 2023 Around The U.S.</p>
@@ -144,17 +53,33 @@
             class="modal__input"
             name="name"
             placeholder="Name"
+            id="profile__name-input"
           />
           <input
             type="text"
             class="modal__input"
             name="description"
             placeholder="Description"
+            id="profile__description-input"
           />
           <button type="submit" class="modal__button">Save</button>
         </form>
       </div>
     </div>
+
+    <template id="card__template">
+      <li class="card">
+        <img src="" alt="" class="card__image" />
+        <div class="card__caption">
+          <h2 class="card__name"></h2>
+          <button
+            type="button"
+            class="card__like-button"
+            name="like-button"
+          ></button>
+        </div>
+      </li>
+    </template>
 
     <script src="./scripts/index.js"></script>
   </body>

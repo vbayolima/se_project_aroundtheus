@@ -48,8 +48,8 @@
 }
 
 .profile__edit-button:hover {
-  opacity: 0.6;
   cursor: pointer;
+  opacity: 0.6;
 }
 
 .profile__description {
@@ -79,8 +79,8 @@
 }
 
 .profile__add-button:hover {
-  opacity: 0.6;
   cursor: pointer;
+  opacity: 0.6;
 }
 
 @media screen and (max-width: 572px) {

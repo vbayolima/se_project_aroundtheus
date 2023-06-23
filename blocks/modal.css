@@ -87,6 +87,11 @@
   line-height: 22px;
 }
 
+.modal__button:hover {
+  cursor: pointer;
+  opacity: 0.8;
+}
+
 @media screen and (max-width: 572px) {
   .modal {
     padding: 0 19px;
