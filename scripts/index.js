@@ -46,12 +46,17 @@ const addNewCardModalCloseBtn = addNewCardModal.querySelector(
   "#modal__close-button"
 );
 
+// Form data
+const profileEditForm = profileEditModal.querySelector(".modal__form");
+const addCardForm = addNewCardModal.querySelector(".modal__form");
+
 const profileNameInput = document.querySelector("#profile__name-input");
 const profileDescriptionInput = document.querySelector(
   "#profile__description-input"
 );
 
-const profileEditForm = profileEditModal.querySelector(".modal__form");
+const cardTitleInput = addCardForm.querySelector(".modal__input_title");
+const cardLinkInput = addCardForm.querySelector(".modal__input_link");
 
 const cardListElement = document.querySelector(".cards__list");
 const cardTemplate =
@@ -85,6 +90,11 @@ function getCardElement(cardData) {
   return cardElement;
 }
 
+function renderCard(cardData) {
+  const cardElement = getCardElement(cardData);
+  cardListElement.prepend(cardElement);
+}
+
 // Event Handlers
 
 /* function so name and description changes to modal input */
@@ -95,6 +105,18 @@ function handleProfileEditSubmit(event) {
   profileDescription.textContent = profileDescriptionInput.value;
 
   closePopup(profileEditModal);
+}
+
+function handleAddCardFormSubmit(event) {
+  event.preventDefault();
+
+  // const cardTitleValue = cardTitleInput.value;
+  // const cardLinkValue = cardLinkInput.value;
+  const name = cardTitleInput.value;
+  const link = cardLinkInput.value;
+  renderCard({ name, link }, cardListElement);
+
+  closePopup(addNewCardModal);
 }
 
 // Event Listeners
@@ -115,6 +137,8 @@ profileModalCloseBtn.addEventListener("click", () =>
 /* This makes it so name and description changes to modal input when press submit/save button */
 profileEditForm.addEventListener("submit", handleProfileEditSubmit);
 
+addCardForm.addEventListener("submit", handleAddCardFormSubmit);
+
 //add new card button opens modal using css modifier
 addNewCardButton.addEventListener("click", () => openModal(addNewCardModal));
 
@@ -125,7 +149,4 @@ addNewCardModalCloseBtn.addEventListener("click", () =>
 
 /* This creates each card using function getCardElement and makes it so the last card added is 
    the first in the list by using prepend */
-initialCards.forEach((cardData) => {
-  const cardElement = getCardElement(cardData);
-  cardListElement.prepend(cardElement);
-});
+initialCards.forEach((cardData) => renderCard(cardData, cardListElement));
