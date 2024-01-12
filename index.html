@@ -101,9 +101,27 @@
       </div>
     </div>
 
+    <!-- Preview Img modal -->
+    <div class="modal" id="preview__img-modal">
+      <div class="modal__container modal__container_type_img">
+        <button
+          class="modal__close"
+          id="modal__close-button"
+          type="button"
+        ></button>
+        <img src="" alt="" class="popup__img" />
+        <p class="preview__img_caption"></p>
+      </div>
+    </div>
+
     <template id="card__template">
       <li class="card">
         <img src="" alt="" class="card__image" />
+        <button
+          type="button"
+          class="card__delete-btn"
+          name="delete-btn"
+        ></button>
         <div class="card__caption">
           <h2 class="card__name"></h2>
           <button

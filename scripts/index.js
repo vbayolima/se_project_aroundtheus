@@ -29,7 +29,6 @@ const initialCards = [
 
 const profileEditBtn = document.querySelector("#profile__edit-button");
 const profileEditModal = document.querySelector("#profile__edit-modal");
-
 //chooses profile edit modal close button specifically
 const profileModalCloseBtn = profileEditModal.querySelector(
   "#modal__close-button"
@@ -40,9 +39,17 @@ const profileDescription = document.querySelector(".profile__description");
 
 const addNewCardButton = document.querySelector(".profile__add-button");
 const addNewCardModal = document.querySelector("#card__add-modal");
-
 //specifies add new card modal close button
 const addNewCardModalCloseBtn = addNewCardModal.querySelector(
+  "#modal__close-button"
+);
+
+const previewImgModal = document.querySelector("#preview__img-modal");
+const imageModalELement = previewImgModal.querySelector(".popup__img");
+const imageModalCaption = previewImgModal.querySelector(
+  ".preview__img_caption"
+);
+const previewImgModalCloseBtn = previewImgModal.querySelector(
   "#modal__close-button"
 );
 
@@ -73,20 +80,42 @@ function openModal(modal) {
   modal.classList.add("modal_opened");
 }
 
-/* creates the cards */
+/* creates the cards when pg loads automatically and when user adds */
 function getCardElement(cardData) {
   // clone the template element with all its content and store it in a cardElement variable
   const cardElement = cardTemplate.cloneNode(true);
   // access the card title and image and store them in variables
   const cardImageElement = cardElement.querySelector(".card__image");
   const cardNameElement = cardElement.querySelector(".card__name");
+  // find like btn so each card, including newly made ones can toggle like btn on and off
+  const likeButton = cardElement.querySelector(".card__like-button");
+
+  // changes background of like button to active img when clicked
+  likeButton.addEventListener("click", () => {
+    likeButton.classList.toggle("card__like-button_active");
+  });
+
+  //find delete btn and add event listener so can function
+  const deleteButton = cardElement.querySelector(".card__delete-btn");
+  deleteButton.addEventListener("click", () => {
+    cardElement.remove();
+  });
+
+  //makes the img preview modal
+  cardImageElement.addEventListener("click", () => {
+    imageModalELement.src = cardData.link;
+    imageModalCaption.textContent = cardData.name;
+
+    openModal(previewImgModal);
+  });
+
   // set the path to the image to the link field of the object
   cardImageElement.src = cardData.link;
   // set the image alt text to the name field of the object
   cardImageElement.alt = cardData.name;
   // set the card title to the name field of the object, too
   cardNameElement.textContent = cardData.name;
-  // return the ready HTML element with the filled-in data
+  // return the ready HTML element with the filled-in data, and ability to like the card
   return cardElement;
 }
 
@@ -145,6 +174,11 @@ addNewCardButton.addEventListener("click", () => openModal(addNewCardModal));
 //removes add card modal when click close
 addNewCardModalCloseBtn.addEventListener("click", () =>
   closePopup(addNewCardModal)
+);
+
+//close when click on preview image modal
+previewImgModalCloseBtn.addEventListener("click", () =>
+  closePopup(previewImgModal)
 );
 
 /* This creates each card using function getCardElement and makes it so the last card added is 

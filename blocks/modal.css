@@ -7,11 +7,18 @@
   z-index: 50;
   background-color: rgba(0, 0, 0, 0.5);
   display: flex;
+  /* this w modal_opened allows for smooth transition when opening and closing modals */
   visibility: hidden;
+  opacity: 0;
+  /* transition for closing. transition starts 0.6s after opening transition ends (vis 0s 0.6s) */
+  transition: visibility 0s 0.6s, opacity 0.6s linear;
 }
 
 .modal_opened {
   visibility: visible;
+  opacity: 1;
+  /* this is the transition for opening*/
+  transition: visibility 0s, opacity 0.6s linear;
 }
 
 .modal__container {
