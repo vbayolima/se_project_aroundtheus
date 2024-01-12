@@ -30,10 +30,21 @@ const initialCards = [
 const profileEditBtn = document.querySelector("#profile__edit-button");
 const profileEditModal = document.querySelector("#profile__edit-modal");
 
-const modalCloseBtn = document.querySelector("#modal__close-button");
+//chooses profile edit modal close button specifically
+const profileModalCloseBtn = profileEditModal.querySelector(
+  "#modal__close-button"
+);
 
 const profileName = document.querySelector(".profile__name");
 const profileDescription = document.querySelector(".profile__description");
+
+const addNewCardButton = document.querySelector(".profile__add-button");
+const addNewCardModal = document.querySelector("#card__add-modal");
+
+//specifies add new card modal close button
+const addNewCardModalCloseBtn = addNewCardModal.querySelector(
+  "#modal__close-button"
+);
 
 const profileNameInput = document.querySelector("#profile__name-input");
 const profileDescriptionInput = document.querySelector(
@@ -49,8 +60,12 @@ const cardTemplate =
 // Functions
 
 /* function to close modal popup so don't have to repeat code multiple times, only call this function */
-function closePopup() {
-  profileEditModal.classList.remove("modal_opened");
+function closePopup(modal) {
+  modal.classList.remove("modal_opened");
+}
+
+function openModal(modal) {
+  modal.classList.add("modal_opened");
 }
 
 /* creates the cards */
@@ -79,24 +94,34 @@ function handleProfileEditSubmit(event) {
   profileName.textContent = profileNameInput.value;
   profileDescription.textContent = profileDescriptionInput.value;
 
-  closePopup();
+  closePopup(profileEditModal);
 }
 
 // Event Listeners
 
-/* Shows modal to screen by adding modal_opened modifier from css */
-profileEditBtn.addEventListener("click", function () {
+/* Shows modal to screen by adding modal_opened modifier from css and presets inputs */
+profileEditBtn.addEventListener("click", () => {
   profileNameInput.value = profileName.textContent;
   profileDescriptionInput.value = profileDescription.textContent;
 
-  profileEditModal.classList.add("modal_opened");
+  openModal(profileEditModal);
 });
 
 /* Removes modal_opened modifier when click close button of modal */
-modalCloseBtn.addEventListener("click", closePopup);
+profileModalCloseBtn.addEventListener("click", () =>
+  closePopup(profileEditModal)
+);
 
 /* This makes it so name and description changes to modal input when press submit/save button */
 profileEditForm.addEventListener("submit", handleProfileEditSubmit);
+
+//add new card button opens modal using css modifier
+addNewCardButton.addEventListener("click", () => openModal(addNewCardModal));
+
+//removes add card modal when click close
+addNewCardModalCloseBtn.addEventListener("click", () =>
+  closePopup(addNewCardModal)
+);
 
 /* This creates each card using function getCardElement and makes it so the last card added is 
    the first in the list by using prepend */
