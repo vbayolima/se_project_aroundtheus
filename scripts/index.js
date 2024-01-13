@@ -54,8 +54,8 @@ const previewImgModalCloseBtn = previewImgModal.querySelector(
 );
 
 // Form data
-const profileEditForm = profileEditModal.querySelector(".modal__form");
-const addCardForm = addNewCardModal.querySelector(".modal__form");
+const profileEditForm = document.forms["profile-form"];
+const addCardForm = document.forms["card-form"];
 
 const profileNameInput = document.querySelector("#profile__name-input");
 const profileDescriptionInput = document.querySelector(
@@ -104,6 +104,8 @@ function getCardElement(cardData) {
   //makes the img preview modal
   cardImageElement.addEventListener("click", () => {
     imageModalELement.src = cardData.link;
+    //alternative text for image
+    imageModalELement.alt = cardData.name;
     imageModalCaption.textContent = cardData.name;
 
     openModal(previewImgModal);
@@ -144,6 +146,8 @@ function handleAddCardFormSubmit(event) {
   const name = cardTitleInput.value;
   const link = cardLinkInput.value;
   renderCard({ name, link }, cardListElement);
+  // resets the input so user doesn't have to manually delete prior inputs
+  event.target.reset();
 
   closePopup(addNewCardModal);
 }
@@ -158,10 +162,12 @@ profileEditBtn.addEventListener("click", () => {
   openModal(profileEditModal);
 });
 
-/* Removes modal_opened modifier when click close button of modal */
-profileModalCloseBtn.addEventListener("click", () =>
-  closePopup(profileEditModal)
-);
+// closes all modals when click their close buttons
+const closeButtons = document.querySelectorAll(".modal__close");
+closeButtons.forEach((button) => {
+  const modal = button.closest(".modal");
+  button.addEventListener("click", () => closePopup(modal));
+});
 
 /* This makes it so name and description changes to modal input when press submit/save button */
 profileEditForm.addEventListener("submit", handleProfileEditSubmit);
@@ -170,16 +176,6 @@ addCardForm.addEventListener("submit", handleAddCardFormSubmit);
 
 //add new card button opens modal using css modifier
 addNewCardButton.addEventListener("click", () => openModal(addNewCardModal));
-
-//removes add card modal when click close
-addNewCardModalCloseBtn.addEventListener("click", () =>
-  closePopup(addNewCardModal)
-);
-
-//close when click on preview image modal
-previewImgModalCloseBtn.addEventListener("click", () =>
-  closePopup(previewImgModal)
-);
 
 /* This creates each card using function getCardElement and makes it so the last card added is 
    the first in the list by using prepend */
