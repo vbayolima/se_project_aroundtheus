@@ -176,26 +176,38 @@ const handleEscape = window.addEventListener("keydown", (evt) => {
   }
 });
 
-const handleOutsideClick = document.addEventListener("click", (evt) => {
-  if (!evt.target.hasClass(".modal")) {
-    closePopup(profileEditModal);
-    closePopup(addNewCardModal);
-    closePopup(previewImgModal);
-  }
+const modals = document.querySelectorAll(".modal");
+modals.forEach((modal) => {
+  modal.addEventListener("click", (evt) => {
+    if (evt.target.classList.contains(modals)) {
+      closePopup(profileEditModal);
+      closePopup(addNewCardModal);
+      closePopup(previewImgModal);
+    }
+  });
 });
 
-const popup = document.querySelectorAll(".modal");
+// const handleOutsideClick = document.addEventListener("click", (evt) => {
+//   if (!evt.target.hasClass(".modal")) {
+//     closePopup(profileEditModal);
+//     closePopup(addNewCardModal);
+//     closePopup(previewImgModal);
+//   }
+// });
+
 // document.addEventListener("click", (evt) => {
 //   if (!popup.contains(evt.target) && evt.target !== closeButtons) {
 //     closePopup(profileEditModal);
 //     closePopup(addNewCardModal);
+//     closePopup(previewImgModal);
 //   }
 // });
-window.onclick = (evt) => {
-  if (evt.target == popup) {
-    closePopup(popup);
-  }
-};
+
+// window.onclick = (evt) => {
+//   if (evt.target == popup) {
+//     closePopup(popup);
+//   }
+// };
 
 /* This makes it so name and description changes to modal input when press submit/save button */
 profileEditForm.addEventListener("submit", handleProfileEditSubmit);
