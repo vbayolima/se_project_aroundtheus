@@ -167,6 +167,27 @@ closeButtons.forEach((button) => {
   button.addEventListener("click", () => closePopup(modal));
 });
 
+//closes when press esc key
+window.addEventListener("keydown", (evt) => {
+  if (evt.key === "Escape") {
+    closePopup(profileEditModal);
+    closePopup(addNewCardModal);
+  }
+});
+
+const popup = document.querySelectorAll(".modal");
+// document.addEventListener("click", (evt) => {
+//   if (!popup.contains(evt.target) && evt.target !== closeButtons) {
+//     closePopup(profileEditModal);
+//     closePopup(addNewCardModal);
+//   }
+// });
+window.onclick = (evt) => {
+  if (evt.target == popup) {
+    closePopup(popup);
+  }
+};
+
 /* This makes it so name and description changes to modal input when press submit/save button */
 profileEditForm.addEventListener("submit", handleProfileEditSubmit);
 
