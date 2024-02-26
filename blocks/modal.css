@@ -22,6 +22,7 @@
 }
 
 .modal__container {
+  max-height: 430px;
   position: relative;
   background-color: #fff;
   color: #000;
@@ -74,9 +75,10 @@
   line-height: 17px;
 }
 
-.modal__input:first-of-type {
+/* did this same effect using the modal error message's min-height */
+/* .modal__input:first-of-type {
   margin-bottom: 30px;
-}
+} */
 
 .modal__input:last-of-type {
   margin-bottom: 48px;
@@ -146,7 +148,7 @@
 /* Following for validation styling */
 .modal__input:invalid {
   border-bottom: 1px solid #ff0000;
-  margin-bottom: 5px;
+  margin-bottom: 0;
 }
 
 .modal__error {
@@ -154,6 +156,9 @@
   color: #ff0000;
   font-size: 12px;
   max-width: 358px;
+  /* this becomes the bottom margin for the input  */
+  min-height: 30px;
+  display: block;
 }
 
 .modal__button:disabled {
