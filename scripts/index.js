@@ -176,38 +176,16 @@ const handleEscape = window.addEventListener("keydown", (evt) => {
   }
 });
 
-const modals = document.querySelectorAll(".modal");
-modals.forEach((modal) => {
+const modalList = document.querySelectorAll(".modal");
+modalList.forEach((modal) => {
   modal.addEventListener("click", (evt) => {
-    if (evt.target.classList.contains(modals)) {
-      closePopup(profileEditModal);
-      closePopup(addNewCardModal);
-      closePopup(previewImgModal);
+    // if statement ensures only closes if clicked on a part of modal that
+    // doesn't have an event listener already on it
+    if (evt.target.classList.contains("modal")) {
+      closePopup(modal);
     }
   });
 });
-
-// const handleOutsideClick = document.addEventListener("click", (evt) => {
-//   if (!evt.target.hasClass(".modal")) {
-//     closePopup(profileEditModal);
-//     closePopup(addNewCardModal);
-//     closePopup(previewImgModal);
-//   }
-// });
-
-// document.addEventListener("click", (evt) => {
-//   if (!popup.contains(evt.target) && evt.target !== closeButtons) {
-//     closePopup(profileEditModal);
-//     closePopup(addNewCardModal);
-//     closePopup(previewImgModal);
-//   }
-// });
-
-// window.onclick = (evt) => {
-//   if (evt.target == popup) {
-//     closePopup(popup);
-//   }
-// };
 
 /* This makes it so name and description changes to modal input when press submit/save button */
 profileEditForm.addEventListener("submit", handleProfileEditSubmit);
