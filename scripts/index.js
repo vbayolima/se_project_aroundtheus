@@ -168,10 +168,19 @@ closeButtons.forEach((button) => {
 });
 
 //closes when press esc key
-window.addEventListener("keydown", (evt) => {
+const handleEscape = window.addEventListener("keydown", (evt) => {
   if (evt.key === "Escape") {
     closePopup(profileEditModal);
     closePopup(addNewCardModal);
+    closePopup(previewImgModal);
+  }
+});
+
+const handleOutsideClick = document.addEventListener("click", (evt) => {
+  if (!evt.target.hasClass(".modal")) {
+    closePopup(profileEditModal);
+    closePopup(addNewCardModal);
+    closePopup(previewImgModal);
   }
 });
 
