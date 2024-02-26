@@ -141,8 +141,6 @@ function handleProfileEditSubmit(event) {
 function handleAddCardFormSubmit(event) {
   event.preventDefault();
 
-  // const cardTitleValue = cardTitleInput.value;
-  // const cardLinkValue = cardLinkInput.value;
   const name = cardTitleInput.value;
   const link = cardLinkInput.value;
   renderCard({ name, link }, cardListElement);
