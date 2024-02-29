@@ -148,7 +148,7 @@
 /* Following for validation styling */
 .modal__input:invalid {
   border-bottom: 1px solid #ff0000;
-  margin-bottom: 0;
+  margin-bottom: 5px;
 }
 
 .modal__error {

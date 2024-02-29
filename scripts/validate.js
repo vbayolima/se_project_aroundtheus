@@ -1,22 +1,23 @@
-const showInputError = (formElement, inputElement, errorMessage) => {
+//had errorMessage as third parameter instead of settings
+const showInputError = (formElement, inputElement, settings) => {
   const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
-  inputElement.classList.add("modal__input_type_error");
-  errorElement.textContent = errorMessage;
-  errorElement.classList.add("modal__input-error_active");
+  inputElement.classList.add(settings.inputErrorClass);
+  errorElement.textContent = inputElement.validationMessage;
+  errorElement.classList.add(settings.errorClass);
 };
 
-const hideInputError = (formElement, inputElement) => {
+const hideInputError = (formElement, inputElement, settings) => {
   const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
-  inputElement.classList.remove("modal__input_type_error");
-  errorElement.classList.remove("modal__input-error_active");
+  inputElement.classList.remove(settings.inputErrorClass);
+  errorElement.classList.remove(settings.errorClass);
   errorElement.textContent = "";
 };
 
 const checkInputValidity = (formElement, inputElement, settings) => {
   if (!inputElement.validity.valid) {
-    showInputError(formElement, inputElement, inputElement.validationMessage);
+    showInputError(formElement, inputElement, settings);
   } else {
-    hideInputError(formElement, inputElement);
+    hideInputError(formElement, inputElement, settings);
   }
 };
 
@@ -53,6 +54,7 @@ const hasInvalidInput = (inputList) => {
   });
 };
 
+//third parameter is the same as getting settings.inactiveButtonClass in function
 const toggleButtonState = (
   inputList,
   buttonElement,
