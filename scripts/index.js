@@ -72,12 +72,16 @@ const cardTemplate =
 // Functions
 
 /* function to close modal popup so don't have to repeat code multiple times, only call this function */
+//in these open and close modal function, also adds and
+//removes the closing w esc button function
 function closePopup(modal) {
   modal.classList.remove("modal_opened");
+  document.removeEventListener("keydown", handleEscape);
 }
 
 function openModal(modal) {
   modal.classList.add("modal_opened");
+  document.addEventListener("keydown", handleEscape);
 }
 
 /* creates the cards when pg loads automatically and when user adds */
@@ -160,39 +164,30 @@ profileEditBtn.addEventListener("click", () => {
   openModal(profileEditModal);
 });
 
-// closes all modals when click their close buttons
-const closeButtons = document.querySelectorAll(".modal__close");
-closeButtons.forEach((button) => {
-  const modal = button.closest(".modal");
-  button.addEventListener("click", () => closePopup(modal));
-});
-
 //closes when press esc key
-
 function handleEscape(evt) {
   if (evt.key === "Escape") {
-    closePopup(profileEditModal);
-    closePopup(addNewCardModal);
-    closePopup(previewImgModal);
+    // finds the opened modal
+    const modalOpened = document.querySelector(".modal_opened");
+    closePopup(modalOpened);
   }
 }
-document.addEventListener("keydown", handleEscape);
 
-function removeEscListener() {
-  document.removeEventListener("keydown", handleEscape);
-}
-
-const modalList = document.querySelectorAll(".modal");
-modalList.forEach((modal) => {
+// this closes modal w close button and overlay
+const modals = document.querySelectorAll(".modal");
+modals.forEach((modal) => {
   modal.addEventListener("mousedown", (evt) => {
-    // if statement ensures only closes if clicked on a part of modal that
-    // doesn't have an event listener already on it
-    if (evt.target.classList.contains("modal")) {
+    // overlay close
+    if (evt.target.classList.contains("modal_opened")) {
       closePopup(modal);
-      removeEscListener();
+    }
+    // close button
+    if (evt.target.classList.contains("modal__close")) {
+      closePopup(modal);
     }
   });
 });
+
 /* This makes it so name and description changes to modal input when press submit/save button */
 profileEditForm.addEventListener("submit", handleProfileEditSubmit);
 
