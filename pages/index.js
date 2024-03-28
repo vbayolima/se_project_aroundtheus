@@ -1,3 +1,6 @@
+import Card from "../components/Card.js";
+import FormValidator from "../components/FormValidator.js";
+
 const initialCards = [
   {
     name: "Yosemite Valley",
@@ -53,6 +56,30 @@ const previewImgModalCloseBtn = previewImgModal.querySelector(
   "#modal__close-button"
 );
 
+const cardSelector = "#card__template";
+
+// VALIDATION
+
+const validationSettings = {
+  inputSelector: ".modal__input",
+  submitButtonSelector: ".modal__button",
+  inactiveButtonClass: "modal__button_disabled",
+  inputErrorClass: "modal__input_type_error",
+  errorClass: "modal__error_visible",
+};
+
+const editFormElement = profileEditModal.querySelector(".modal__form");
+const addFormElement = addNewCardModal.querySelector(".modal__form");
+
+const editFormValidator = new FormValidator(
+  validationSettings,
+  editFormElement
+);
+const addFormValidator = new FormValidator(validationSettings, addFormElement);
+
+editFormValidator.enableValidation();
+addFormValidator.enableValidation();
+
 // Form data
 const profileEditForm = document.forms["profile-form"];
 const addCardForm = document.forms["card-form"];
@@ -84,7 +111,7 @@ function openModal(modal) {
   document.addEventListener("keydown", handleEscape);
 }
 
-/* creates the cards when pg loads automatically and when user adds */
+/* CREATES THE CARDS WHEN PG LOADS AUTOMATICALLY AND WHEN USER ADDS */
 function getCardElement(cardData) {
   // clone the template element with all its content and store it in a cardElement variable
   const cardElement = cardTemplate.cloneNode(true);
@@ -125,9 +152,15 @@ function getCardElement(cardData) {
   return cardElement;
 }
 
-function renderCard(cardData) {
-  const cardElement = getCardElement(cardData);
-  cardListElement.prepend(cardElement);
+// function renderCard(cardData) {
+//   const cardElement = getCardElement(cardData);
+//   const card = new Card(cardData, cardSelector);
+//   cardListElement.prepend(cardElement);
+// }
+
+function renderCard(cardData, wrap) {
+  const card = new Card(cardData, cardSelector, handleImageClick);
+  wrap.prepend(card.getView());
 }
 
 // Event Handlers
