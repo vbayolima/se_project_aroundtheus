@@ -58,13 +58,6 @@ const previewImgModalCloseBtn = previewImgModal.querySelector(
 
 const cardSelector = "#card__template";
 
-// ADDS CARD
-// initialCards.forEach((cardData) => {
-//   const card = new Card(cardData, "#card__template", handleImageClick);
-//   const cardElement = card.getView();
-//   cardListElement.prepend(cardElement);
-// });
-
 // PREVIEW IMAGE MODAL
 function handleImageClick(cardData) {
   imageModalElement.setAttribute("src", cardData.link);

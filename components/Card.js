@@ -5,7 +5,6 @@ export default class Card {
     this._handleImageClick = handleImageClick;
   }
 
-  // private method _setEventListeners that sets necessary event listeners
   _setEventListeners() {
     this._cardElement
       .querySelector(".card__like-button")
@@ -23,8 +22,8 @@ export default class Card {
       .querySelector(".card__image")
       .addEventListener("click", () => {
         this._handleImageClick({
-          name: this._name,
-          link: this._link,
+          name: this._cardData.name,
+          link: this._cardData.link,
         });
       });
   }
@@ -48,13 +47,14 @@ export default class Card {
     // sets the path to img to the link field of obj
     this._cardElement
       .querySelector(".card__image")
-      .setAttribute("src", this._link);
+      .setAttribute("src", this._cardData.link);
     // sets img alt text to name field of obj
     this._cardElement
       .querySelector(".card__name")
-      .setAttribute("alt", this._name);
+      .setAttribute("alt", this._cardData.name);
     //sets card title to name field of obj
-    this._cardElement.querySelector(".card__name").textContent = this._name;
+    this._cardElement.querySelector(".card__name").textContent =
+      this._cardData.name;
 
     this._setEventListeners();
 
