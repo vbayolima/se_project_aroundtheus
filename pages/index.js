@@ -176,7 +176,10 @@ function handleAddCardFormSubmit(event) {
 
   const name = cardTitleInput.value;
   const link = cardLinkInput.value;
-  renderCard({ name, link }, cardListElement);
+  // renderCard({ name, link }, cardListElement);
+  const card = new Card({ name, link }, "#card__template", handleImageClick);
+  const cardElement = card.getView();
+  cardListElement.prepend(cardElement);
   // resets the input so user doesn't have to manually delete prior inputs
   event.target.reset();
 
