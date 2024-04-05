@@ -48,7 +48,7 @@ const addNewCardModalCloseBtn = addNewCardModal.querySelector(
 );
 
 const previewImgModal = document.querySelector("#preview__img-modal");
-const imageModalELement = previewImgModal.querySelector(".popup__img");
+const imageModalElement = previewImgModal.querySelector(".popup__img");
 const imageModalCaption = previewImgModal.querySelector(
   ".preview__img_caption"
 );
@@ -58,8 +58,22 @@ const previewImgModalCloseBtn = previewImgModal.querySelector(
 
 const cardSelector = "#card__template";
 
-// VALIDATION
+// ADDS CARD
+// initialCards.forEach((cardData) => {
+//   const card = new Card(cardData, "#card__template", handleImageClick);
+//   const cardElement = card.getView();
+//   cardListElement.prepend(cardElement);
+// });
 
+// PREVIEW IMAGE MODAL
+function handleImageClick(cardData) {
+  imageModalElement.setAttribute("src", cardData.link);
+  imageModalElement.setAttribute("alt", cardData.name);
+  imageModalCaption.textContent = cardData.name;
+  openModal(previewImgModal);
+}
+
+// VALIDATION
 const validationSettings = {
   inputSelector: ".modal__input",
   submitButtonSelector: ".modal__button",
@@ -114,54 +128,43 @@ function openModal(modal) {
 /* CREATES THE CARDS WHEN PG LOADS AUTOMATICALLY AND WHEN USER ADDS */
 function getCardElement(cardData) {
   // clone the template element with all its content and store it in a cardElement variable
-  const cardElement = cardTemplate.cloneNode(true);
+  // const cardElement = cardTemplate.cloneNode(true);
   // access the card title and image and store them in variables
-  const cardImageElement = cardElement.querySelector(".card__image");
-  const cardNameElement = cardElement.querySelector(".card__name");
+  // const cardImageElement = cardElement.querySelector(".card__image");
+  // const cardNameElement = cardElement.querySelector(".card__name");
   // find like btn so each card, including newly made ones can toggle like btn on and off
-  const likeButton = cardElement.querySelector(".card__like-button");
-
+  // const likeButton = cardElement.querySelector(".card__like-button");
   // changes background of like button to active img when clicked
-  likeButton.addEventListener("click", () => {
-    likeButton.classList.toggle("card__like-button_active");
-  });
-
+  // likeButton.addEventListener("click", () => {
+  //   likeButton.classList.toggle("card__like-button_active");
+  // });
   //find delete btn and add event listener so can function
-  const deleteButton = cardElement.querySelector(".card__delete-btn");
-  deleteButton.addEventListener("click", () => {
-    cardElement.remove();
-  });
-
+  // const deleteButton = cardElement.querySelector(".card__delete-btn");
+  // deleteButton.addEventListener("click", () => {
+  //   cardElement.remove();
+  // });
   //makes the img preview modal
-  cardImageElement.addEventListener("click", () => {
-    imageModalELement.src = cardData.link;
-    //alternative text for image
-    imageModalELement.alt = cardData.name;
-    imageModalCaption.textContent = cardData.name;
-
-    openModal(previewImgModal);
-  });
-
+  // cardImageElement.addEventListener("click", () => {
+  //   imageModalElement.src = cardData.link;
+  //   //alternative text for image
+  //   imageModalElement.alt = cardData.name;
+  //   imageModalCaption.textContent = cardData.name;
+  //   openModal(previewImgModal);
+  // });
   // set the path to the image to the link field of the object
-  cardImageElement.src = cardData.link;
+  // cardImageElement.src = cardData.link;
   // set the image alt text to the name field of the object
-  cardImageElement.alt = cardData.name;
+  // cardImageElement.alt = cardData.name;
   // set the card title to the name field of the object, too
-  cardNameElement.textContent = cardData.name;
+  // cardNameElement.textContent = cardData.name;
   // return the ready HTML element with the filled-in data, and ability to like the card
-  return cardElement;
+  // return cardElement;
 }
 
 // function renderCard(cardData) {
 //   const cardElement = getCardElement(cardData);
-//   const card = new Card(cardData, cardSelector);
 //   cardListElement.prepend(cardElement);
 // }
-
-function renderCard(cardData, wrap) {
-  const card = new Card(cardData, cardSelector, handleImageClick);
-  wrap.prepend(card.getView());
-}
 
 // Event Handlers
 
@@ -231,4 +234,10 @@ addNewCardButton.addEventListener("click", () => openModal(addNewCardModal));
 
 /* This creates each card using function getCardElement and makes it so the last card added is 
    the first in the list by using prepend */
-initialCards.forEach((cardData) => renderCard(cardData, cardListElement));
+// initialCards.forEach((cardData) => renderCard(cardData, cardListElement));
+
+initialCards.forEach((cardData) => {
+  const card = new Card(cardData, "#card__template", handleImageClick);
+  const cardElement = card.getView();
+  cardListElement.prepend(cardElement);
+});
