@@ -145,7 +145,7 @@ function handleAddCardFormSubmit(event) {
   // resets the input so user doesn't have to manually delete prior inputs
   event.target.reset();
 
-  // resets validation, so submit button is reset, no adding empty cards
+  // resets submit button, no adding empty cards
   addFormValidator.toggleButtonState();
 
   closePopup(addNewCardModal);
@@ -161,10 +161,12 @@ function handleImageClick(cardData) {
 
 // Event Listeners
 
-/* Shows modal to screen by adding modal_opened modifier from css and presets inputs */
+/* Shows modal to screen */
 profileEditBtn.addEventListener("click", () => {
   profileNameInput.value = profileName.textContent;
   profileDescriptionInput.value = profileDescription.textContent;
+
+  editFormValidator.resetValidation();
 
   openModal(profileEditModal);
 });
@@ -204,6 +206,5 @@ addNewCardButton.addEventListener("click", () => openModal(addNewCardModal));
 /* This creates each card using Card.js and makes it so the last card added is 
    the first in the list by using prepend */
 initialCards.forEach((cardData) => {
-  createCard(cardData);
   renderCard(cardData);
 });
