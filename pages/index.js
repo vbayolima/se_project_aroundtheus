@@ -111,6 +111,12 @@ function openModal(modal) {
 function createCard(cardData) {
   const card = new Card(cardData, "#card__template", handleImageClick);
   const cardElement = card.getView();
+  return cardElement;
+}
+
+// to render/add created card
+function renderCard(cardData) {
+  const cardElement = createCard(cardData);
   cardListElement.prepend(cardElement);
 }
 
@@ -131,13 +137,16 @@ function handleAddCardFormSubmit(event) {
 
   const name = cardTitleInput.value;
   const link = cardLinkInput.value;
-  createCard({ name, link });
+  const cardData = { name, link };
+
+  // adds the new cards that are created in form
+  renderCard(cardData);
 
   // resets the input so user doesn't have to manually delete prior inputs
   event.target.reset();
 
   // resets validation, so submit button is reset, no adding empty cards
-  addFormValidator.resetValidation();
+  addFormValidator.toggleButtonState();
 
   closePopup(addNewCardModal);
 }
@@ -196,4 +205,5 @@ addNewCardButton.addEventListener("click", () => openModal(addNewCardModal));
    the first in the list by using prepend */
 initialCards.forEach((cardData) => {
   createCard(cardData);
+  renderCard(cardData);
 });
