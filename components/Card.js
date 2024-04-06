@@ -36,6 +36,7 @@ export default class Card {
 
   _handleDeleteCard() {
     this._cardElement.remove();
+    this._cardElement = null;
   }
 
   getView() {
@@ -50,7 +51,7 @@ export default class Card {
       .setAttribute("src", this._cardData.link);
     // sets img alt text to name field of obj
     this._cardElement
-      .querySelector(".card__name")
+      .querySelector(".card__image")
       .setAttribute("alt", this._cardData.name);
     //sets card title to name field of obj
     this._cardElement.querySelector(".card__name").textContent =

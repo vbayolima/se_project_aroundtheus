@@ -58,35 +58,6 @@ const previewImgModalCloseBtn = previewImgModal.querySelector(
 
 const cardSelector = "#card__template";
 
-// PREVIEW IMAGE MODAL
-function handleImageClick(cardData) {
-  imageModalElement.setAttribute("src", cardData.link);
-  imageModalElement.setAttribute("alt", cardData.name);
-  imageModalCaption.textContent = cardData.name;
-  openModal(previewImgModal);
-}
-
-// VALIDATION
-const validationSettings = {
-  inputSelector: ".modal__input",
-  submitButtonSelector: ".modal__button",
-  inactiveButtonClass: "modal__button_disabled",
-  inputErrorClass: "modal__input_type_error",
-  errorClass: "modal__error_visible",
-};
-
-const editFormElement = profileEditModal.querySelector(".modal__form");
-const addFormElement = addNewCardModal.querySelector(".modal__form");
-
-const editFormValidator = new FormValidator(
-  validationSettings,
-  editFormElement
-);
-const addFormValidator = new FormValidator(validationSettings, addFormElement);
-
-editFormValidator.enableValidation();
-addFormValidator.enableValidation();
-
 // Form data
 const profileEditForm = document.forms["profile-form"];
 const addCardForm = document.forms["card-form"];
@@ -103,6 +74,24 @@ const cardListElement = document.querySelector(".cards__list");
 const cardTemplate =
   document.querySelector("#card__template").content.firstElementChild;
 
+// VALIDATION
+const validationSettings = {
+  inputSelector: ".modal__input",
+  submitButtonSelector: ".modal__button",
+  inactiveButtonClass: "modal__button_disabled",
+  inputErrorClass: "modal__input_type_error",
+  errorClass: "modal__error_visible",
+};
+
+const editFormValidator = new FormValidator(
+  validationSettings,
+  profileEditForm
+);
+const addFormValidator = new FormValidator(validationSettings, addCardForm);
+
+editFormValidator.enableValidation();
+addFormValidator.enableValidation();
+
 // Functions
 
 /* function to close modal popup so don't have to repeat code multiple times, only call this function */
@@ -118,46 +107,12 @@ function openModal(modal) {
   document.addEventListener("keydown", handleEscape);
 }
 
-/* CREATES THE CARDS WHEN PG LOADS AUTOMATICALLY AND WHEN USER ADDS */
-function getCardElement(cardData) {
-  // clone the template element with all its content and store it in a cardElement variable
-  // const cardElement = cardTemplate.cloneNode(true);
-  // access the card title and image and store them in variables
-  // const cardImageElement = cardElement.querySelector(".card__image");
-  // const cardNameElement = cardElement.querySelector(".card__name");
-  // find like btn so each card, including newly made ones can toggle like btn on and off
-  // const likeButton = cardElement.querySelector(".card__like-button");
-  // changes background of like button to active img when clicked
-  // likeButton.addEventListener("click", () => {
-  //   likeButton.classList.toggle("card__like-button_active");
-  // });
-  //find delete btn and add event listener so can function
-  // const deleteButton = cardElement.querySelector(".card__delete-btn");
-  // deleteButton.addEventListener("click", () => {
-  //   cardElement.remove();
-  // });
-  //makes the img preview modal
-  // cardImageElement.addEventListener("click", () => {
-  //   imageModalElement.src = cardData.link;
-  //   //alternative text for image
-  //   imageModalElement.alt = cardData.name;
-  //   imageModalCaption.textContent = cardData.name;
-  //   openModal(previewImgModal);
-  // });
-  // set the path to the image to the link field of the object
-  // cardImageElement.src = cardData.link;
-  // set the image alt text to the name field of the object
-  // cardImageElement.alt = cardData.name;
-  // set the card title to the name field of the object, too
-  // cardNameElement.textContent = cardData.name;
-  // return the ready HTML element with the filled-in data, and ability to like the card
-  // return cardElement;
+// function to create a new card from Card.js
+function createCard(cardData) {
+  const card = new Card(cardData, "#card__template", handleImageClick);
+  const cardElement = card.getView();
+  cardListElement.prepend(cardElement);
 }
-
-// function renderCard(cardData) {
-//   const cardElement = getCardElement(cardData);
-//   cardListElement.prepend(cardElement);
-// }
 
 // Event Handlers
 
@@ -176,14 +131,20 @@ function handleAddCardFormSubmit(event) {
 
   const name = cardTitleInput.value;
   const link = cardLinkInput.value;
-  // renderCard({ name, link }, cardListElement);
-  const card = new Card({ name, link }, "#card__template", handleImageClick);
-  const cardElement = card.getView();
-  cardListElement.prepend(cardElement);
+  createCard({ name, link });
+
   // resets the input so user doesn't have to manually delete prior inputs
   event.target.reset();
 
   closePopup(addNewCardModal);
+}
+
+// PREVIEW IMAGE MODAL
+function handleImageClick(cardData) {
+  imageModalElement.setAttribute("src", cardData.link);
+  imageModalElement.setAttribute("alt", cardData.name);
+  imageModalCaption.textContent = cardData.name;
+  openModal(previewImgModal);
 }
 
 // Event Listeners
@@ -228,12 +189,8 @@ addCardForm.addEventListener("submit", handleAddCardFormSubmit);
 //add new card button opens modal using css modifier
 addNewCardButton.addEventListener("click", () => openModal(addNewCardModal));
 
-/* This creates each card using function getCardElement and makes it so the last card added is 
+/* This creates each card using Card.js and makes it so the last card added is 
    the first in the list by using prepend */
-// initialCards.forEach((cardData) => renderCard(cardData, cardListElement));
-
 initialCards.forEach((cardData) => {
-  const card = new Card(cardData, "#card__template", handleImageClick);
-  const cardElement = card.getView();
-  cardListElement.prepend(cardElement);
+  createCard(cardData);
 });
