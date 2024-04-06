@@ -136,6 +136,9 @@ function handleAddCardFormSubmit(event) {
   // resets the input so user doesn't have to manually delete prior inputs
   event.target.reset();
 
+  // resets validation, so submit button is reset, no adding empty cards
+  addFormValidator.resetValidation();
+
   closePopup(addNewCardModal);
 }
 
