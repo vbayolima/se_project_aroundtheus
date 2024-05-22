@@ -32,6 +32,18 @@ const initialCards = [
   },
 ];
 
+const section = new Section(
+  {
+    items: initialCards,
+    renderer: (cardData) => {
+      const cardEl = createCard(cardData);
+      section.addItem(cardEl);
+    },
+  },
+  ".cards__list"
+);
+section.renderItems();
+
 /* Elements */
 
 const profileEditBtn = document.querySelector("#profile__edit-button");
@@ -118,10 +130,10 @@ function createCard(cardData) {
 }
 
 // to render/add created card
-function renderCard(cardData) {
-  const cardElement = createCard(cardData);
-  cardListElement.prepend(cardElement);
-}
+// function renderCard(cardData) {
+//   const cardElement = createCard(cardData);
+//   cardListElement.prepend(cardElement);
+// }
 
 // Event Handlers
 
@@ -208,19 +220,6 @@ addNewCardButton.addEventListener("click", () => openModal(addNewCardModal));
 
 /* This creates each card using Card.js and makes it so the last card added is 
    the first in the list by using prepend */
-initialCards.forEach((cardData) => {
-  renderCard(cardData);
-});
-
-// const section = new Section(
-//   {
-//     items: initialCards,
-//     renderer: (cardData) => {
-//       const cardEl = createCard(cardData);
-//       section.addItem(cardEl);
-//     },
-//   },
-//   cardListElement
-// );
-// section.renderItems();
-// section.addItem(cardData);
+// initialCards.forEach((cardData) => {
+//   renderCard(cardData);
+// });
