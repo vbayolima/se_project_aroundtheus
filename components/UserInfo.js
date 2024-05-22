@@ -9,7 +9,7 @@ export default class UserInfo {
     // user data in open form
     return {
       name: this._nameEl.textContent,
-      job: this._jobEl.textContent,
+      description: this._jobEl.textContent,
     };
   }
 
