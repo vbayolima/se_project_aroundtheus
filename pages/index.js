@@ -1,5 +1,9 @@
 import Card from "../components/Card.js";
 import FormValidator from "../components/FormValidator.js";
+import Section from "../components/Section.js";
+import Popup from "../components/Popup.js";
+import PopupWithImage from "../components/PopupWithImage.js";
+import PopupWithForm from "../components/PopupWithForm.js";
 
 const initialCards = [
   {
@@ -94,7 +98,6 @@ addFormValidator.enableValidation();
 
 // Functions
 
-/* function to close modal popup so don't have to repeat code multiple times, only call this function */
 //in these open and close modal function, also adds and
 //removes the closing w esc button function
 function closePopup(modal) {
@@ -208,3 +211,16 @@ addNewCardButton.addEventListener("click", () => openModal(addNewCardModal));
 initialCards.forEach((cardData) => {
   renderCard(cardData);
 });
+
+// const section = new Section(
+//   {
+//     items: initialCards,
+//     renderer: (cardData) => {
+//       const cardEl = createCard(cardData);
+//       section.addItem(cardEl);
+//     },
+//   },
+//   cardListElement
+// );
+// section.renderItems();
+// section.addItem(cardData);
