@@ -123,9 +123,9 @@ profileEditBtn.addEventListener("click", () => {
 });
 
 /* This makes it so name and description changes to modal input when press submit/save button */
-profileEditForm.addEventListener("submit", handleProfileEditSubmit);
+// profileEditForm.addEventListener("submit", handleProfileEditSubmit);
 
-addCardForm.addEventListener("submit", handleAddCardFormSubmit);
+// addCardForm.addEventListener("submit", handleAddCardFormSubmit);
 
 //add new card button opens modal using css modifier
 addNewCardButton.addEventListener("click", () => newCardPopup.open());
