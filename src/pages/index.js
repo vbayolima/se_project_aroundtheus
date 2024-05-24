@@ -43,24 +43,21 @@ function createCard(cardData) {
   return cardElement;
 }
 
-// creates premade cards as page loads
-const section = new Section(
-  {
-    items: initialCards,
-    renderer: (cardData) => {
-      const cardEl = createCard(cardData);
-      section.addItem(cardEl);
-    },
-  },
-  ".cards__list"
-);
-section.renderItems();
-
 // to render/add single created card
 function renderCard(cardData) {
   const cardElement = createCard(cardData);
   section.addItem(cardElement);
 }
+
+// creates premade cards as page loads
+const section = new Section(
+  {
+    items: initialCards,
+    renderer: renderCard,
+  },
+  ".cards__list"
+);
+section.renderItems();
 
 const userInfo = new UserInfo({
   nameSelector: ".profile__name",
