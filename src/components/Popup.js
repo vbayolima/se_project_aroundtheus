@@ -13,11 +13,12 @@ export default class Popup {
     document.removeEventListener("keydown", this._handleEscClose);
   }
 
-  _handleEscClose(evt) {
+  // using arrow function bc otherwise "this" doesn't work
+  _handleEscClose = (evt) => {
     if (evt.key === "Escape") {
       this.close();
     }
-  }
+  };
 
   setEventListeners() {
     this._modals = document.querySelectorAll(".modal");

@@ -27,19 +27,8 @@ export const initialCards = [
 
 //Elements
 export const profileEditBtn = document.querySelector("#profile__edit-button");
-export const profileName = document.querySelector(".profile__name");
-export const profileDescription = document.querySelector(
-  ".profile__description"
-);
 
 export const addNewCardButton = document.querySelector(".profile__add-button");
-export const addNewCardModal = document.querySelector("#card__add-modal");
-
-export const previewImgModal = document.querySelector("#preview__img-modal");
-export const imageModalElement = previewImgModal.querySelector(".popup__img");
-export const imageModalCaption = previewImgModal.querySelector(
-  ".preview__img_caption"
-);
 
 export const profileEditForm = document.forms["profile-form"];
 export const addCardForm = document.forms["card-form"];

@@ -9,13 +9,7 @@ import UserInfo from "../components/UserInfo.js";
 import {
   initialCards,
   profileEditBtn,
-  profileName,
-  profileDescription,
   addNewCardButton,
-  addNewCardModal,
-  previewImgModal,
-  imageModalElement,
-  imageModalCaption,
   profileEditForm,
   addCardForm,
   profileNameInput,
@@ -69,8 +63,8 @@ function renderCard(cardData) {
 }
 
 const userInfo = new UserInfo({
-  nameSelector: "#profile__name-input",
-  jobSelector: "#profile__description-input",
+  nameSelector: ".profile__name",
+  jobSelector: ".profile__description",
 });
 
 const editProfilePopup = new PopupWithForm(
@@ -82,8 +76,8 @@ editProfilePopup.setEventListeners();
 function handleProfileEditSubmit(inputValues) {
   console.log(inputValues);
   userInfo.setUserInfo(inputValues);
-  editFormValidator.toggleButtonState();
   editProfilePopup.close();
+  editFormValidator.resetValidation();
 }
 
 const newCardPopup = new PopupWithForm(
@@ -94,11 +88,9 @@ newCardPopup.setEventListeners();
 
 function handleAddCardFormSubmit(inputValues) {
   console.log(inputValues);
-  // const cardData = { name: inputValues.name, link: inputValues.link };
-  // renderCard(cardData);
   renderCard(inputValues);
-  addFormValidator.toggleButtonState();
   newCardPopup.close();
+  addFormValidator.resetValidation();
 }
 
 // PREVIEW IMAGE MODAL
@@ -111,8 +103,6 @@ imageModal.setEventListeners();
 
 /* Shows modal to screen */
 profileEditBtn.addEventListener("click", () => {
-  // profileNameInput.value = profileName.textContent;
-  // profileDescriptionInput.value = profileDescription.textContent;
   const currentUser = userInfo.getUserInfo();
   profileNameInput.value = currentUser.name;
   profileDescriptionInput.value = currentUser.description;
@@ -121,11 +111,6 @@ profileEditBtn.addEventListener("click", () => {
   editProfilePopup.open();
   addFormValidator.resetValidation();
 });
-
-/* This makes it so name and description changes to modal input when press submit/save button */
-// profileEditForm.addEventListener("submit", handleProfileEditSubmit);
-
-// addCardForm.addEventListener("submit", handleAddCardFormSubmit);
 
 //add new card button opens modal using css modifier
 addNewCardButton.addEventListener("click", () => newCardPopup.open());
