@@ -73,8 +73,8 @@ editProfilePopup.setEventListeners();
 function handleProfileEditSubmit(inputValues) {
   console.log(inputValues);
   userInfo.setUserInfo(inputValues);
-  editProfilePopup.close();
   editFormValidator.resetValidation();
+  editProfilePopup.close();
 }
 
 const newCardPopup = new PopupWithForm(
@@ -86,8 +86,8 @@ newCardPopup.setEventListeners();
 function handleAddCardFormSubmit(inputValues) {
   console.log(inputValues);
   renderCard(inputValues);
-  newCardPopup.close();
   addFormValidator.resetValidation();
+  newCardPopup.close();
 }
 
 // PREVIEW IMAGE MODAL
@@ -106,7 +106,6 @@ profileEditBtn.addEventListener("click", () => {
   editFormValidator.resetValidation();
 
   editProfilePopup.open();
-  addFormValidator.resetValidation();
 });
 
 //add new card button opens modal using css modifier
